@@ -15,8 +15,9 @@ url = "https://ticket.urbtix.hk/internet/"
 # 登录页
 login_url = "https://ticket.urbtix.hk/internet/login/memberLogin"
 # 抢票目标页
-target_url = 'https://ticket.urbtix.hk/internet/eventSearch/keyword?keyword=EASON'
+target_url = 'https://ticket.urbtix.hk/internet/eventSearch/keyword?keyword=FWD+%E5%AF%8C%E8%A1%9B%E4%BF%9D%E9%9A%AA%E5%91%88%E7%8D%BB+FEAR+AND+DREAMS+EASON+CHAN+IN+CONCERT+%28%E5%8A%A0%E5%A0%B4%29'
 
+'''
 date1209 = 'tr[1]'
 date1210 = 'tr[2]'
 date1211 = 'tr[3]'
@@ -35,8 +36,14 @@ date1228 = 'tr[15]'
 date1229 = 'tr[16]'
 date1230 = 'tr[17]'
 date1231 = 'tr[18]'
+'''
 
-date = date1221  # 想抢的日期
+date0102 = 'tr[1]'
+date0103 = 'tr[2]'
+date0106 = 'tr[3]'
+date0107 = 'tr[4]'
+
+date = date0102  # 想抢的日期
 
 """
     def keep_cookie(self):
@@ -86,9 +93,11 @@ class Concert:
         self.driver.get(login_url)
         time.sleep(10)
         while self.driver.title == 'URBTIX':
-            print("please wait for the website2")
+            self.driver.get(login_url)
+            print("please wait for the login")
             time.sleep(1)
-        self.driver.get(login_url)
+        if self.driver.title == '城市售票網':
+            self.driver.get(login_url)
         print("###请点击登录###")
         self.driver.find_element(By.XPATH, '//*[@class="login-member-login-tbl"]/tbody/tr[3]/td[4]/input').send_keys('username')
         self.driver.find_element(By.XPATH, '//*[@class="login-member-login-tbl"]/tbody/tr[4]/td[4]/input').send_keys('password')
